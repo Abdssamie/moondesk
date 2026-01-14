@@ -1,5 +1,4 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
 
 # Get the current branch name
 branch_name=$(git symbolic-ref --short HEAD)
