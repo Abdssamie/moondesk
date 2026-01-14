@@ -90,9 +90,7 @@ describe("Ingestion Handler", () => {
         { id: 2, thresholdLow: null, thresholdHigh: 50 },
       ];
 
-      mockSensorRepo.getAllSystemSensors.mockResolvedValue(
-        sensors as any,
-      );
+      mockSensorRepo.getAllSystemSensors.mockResolvedValue(sensors as any);
 
       await refreshAllSensorThresholds();
 
