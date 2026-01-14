@@ -46,7 +46,23 @@ Use the `Makefile` as the primary interface.
   - Output: `docs/` folder.
   - URL: `http://localhost:8080/swagger/index.html`
 
-## 3. Project Structure
+## 3. Git Workflow & Linear Integration
+
+Strict Git hooks (Husky) are enforced. Agents MUST follow these rules to successfully push code.
+
+- **Branch Naming**:
+  - Format: `mndsk-<ticket-id>-<title-kebab-case>`
+  - Example: `mndsk-39-initial-commit` or `mndsk-42-fix-sensor-reading`
+  - **Restriction**: You CANNOT commit directly to `main` or `master`.
+- **Linear Integration**:
+  - The project uses a `commit-msg` hook.
+  - It automatically prepends the Linear Ticket ID (e.g., `MNDSK-39`) from the branch name to your commit message.
+  - You do not need to manually type `MNDSK-39` in the commit message.
+- **Pushing**:
+  - Direct pushes to `main` are blocked.
+  - You must push to your feature branch and open a Pull Request.
+
+## 4. Project Structure
 
 Adhere to the [Standard Go Project Layout](https://github.com/golang-standards/project-layout).
 
@@ -68,7 +84,7 @@ Adhere to the [Standard Go Project Layout](https://github.com/golang-standards/p
 └── Makefile                # Build scripts
 ```
 
-## 4. Code Style & Conventions
+## 5. Code Style & Conventions
 
 ### General
 - **Formatting**: ALWAYS run `gofmt` on modified files.
@@ -126,12 +142,12 @@ Adhere to the [Standard Go Project Layout](https://github.com/golang-standards/p
 ### Configuration
 - Do not hardcode values. Use `internal/config` which loads from environment variables or config files.
 
-## 5. Legacy & Migration
+## 6. Legacy & Migration
 - **TypeScript Legacy**: The `moondesk-ts-legacy/` directory contains the previous iteration.
   - Consult its `AGENTS.md` (if present) or code for reference on business logic being ported.
   - Do NOT modify legacy code unless explicitly instructed for migration purposes.
 
-## 6. Workflow for Agents
+## 7. Workflow for Agents
 1. **Understand**: Read the request, search for relevant files in `cmd/` or `internal/`.
 2. **Plan**: Outline changes. Check `domain` for model changes first.
 3. **Edit**: Apply changes. If modifying DB schema, consider migrations (if applicable).
