@@ -16,6 +16,7 @@ Moondesk is a scalable, protocol-agnostic IoT platform designed to handle high-t
 - **Infrastructure**: Docker Compose for local development (Redis, Postgres, Mosquitto).
 
 ### Common Commands
+
 - **Setup**: `corepack enable && pnpm install`
 - **Dev**: `turbo run dev` (starts apps)
 - **Docker**: `docker compose up -d` (starts infra + backend services)
@@ -44,23 +45,26 @@ Strict Git hooks (Husky) are enforced. Agents MUST follow these rules to success
 This is a **Monorepo** managed by **Turbo** and **pnpm** workspaces.
 
 ### `apps/`
-*   **`api`**: Fastify backend. Main entry point for REST/WS.
-*   **`mqtt-worker`**: Node.js worker. Handles high-velocity MQTT traffic.
-*   **`edge-simulator`**: Tool to generate synthetic load for testing.
-*   **`moondesk-dash`**: Next.js 14+ frontend application.
-*   **`docs`**: Documentation site.
+
+- **`api`**: Fastify backend. Main entry point for REST/WS.
+- **`mqtt-worker`**: Node.js worker. Handles high-velocity MQTT traffic.
+- **`edge-simulator`**: Tool to generate synthetic load for testing.
+- **`moondesk-dash`**: Next.js 14+ frontend application.
+- **`docs`**: Documentation site.
 
 ### `packages/`
-*   **`config`**: Shared configuration (env vars, schemas, constants).
-*   **`database`**: Drizzle ORM schemas and repositories.
-*   **`domain`**: Shared interfaces, types, Models, and Enums. No side effects.
-*   **`logger`**: Standardized Pino logger configuration.
-*   **`ui`**: Shared React UI components (shadcn/ui based).
-*   **`typescript-config`**: Shared `tsconfig.json` bases.
+
+- **`config`**: Shared configuration (env vars, schemas, constants).
+- **`database`**: Drizzle ORM schemas and repositories.
+- **`domain`**: Shared interfaces, types, Models, and Enums. No side effects.
+- **`logger`**: Standardized Pino logger configuration.
+- **`ui`**: Shared React UI components (shadcn/ui based).
+- **`typescript-config`**: Shared `tsconfig.json` bases.
 
 ## 5. Architecture & Key Patterns
 
 ### System Architecture
+
 1.  **Edge Devices**: Simulate or real devices sending data via MQTT.
 2.  **Broker (Mosquitto)**: Handles MQTT messsaging.
 3.  **Worker (MQTT Worker)**: Subscribes to broker, processes ingestion, and broadcasts "hot" data to API.
@@ -68,9 +72,10 @@ This is a **Monorepo** managed by **Turbo** and **pnpm** workspaces.
 5.  **Storage**: TimescaleDB (Postgres) & Redis.
 
 ### Key Patterns
-*   **Ingestion Flow**: Device -> MQTT -> Mosquitto -> Worker -> Database + API (Broadcast).
-*   **Internal Auth**: The MQ worker talks to the API using a shared `INTERNAL_SERVICE_TOKEN`.
-*   **Bundling**: Backend apps use `tsup` to bundle local workspace packages into a single entry point for Docker.
+
+- **Ingestion Flow**: Device -> MQTT -> Mosquitto -> Worker -> Database + API (Broadcast).
+- **Internal Auth**: The MQ worker talks to the API using a shared `INTERNAL_SERVICE_TOKEN`.
+- **Bundling**: Backend apps use `tsup` to bundle local workspace packages into a single entry point for Docker.
 
 ## 6. Development Philosophy
 
@@ -96,6 +101,7 @@ Every commit message should provide context. The Linear ID will be auto-prepende
 2.  **Detailed Description**: List changed files and why.
 
 Example:
+
 ```text
 feat: implement user login flow
 

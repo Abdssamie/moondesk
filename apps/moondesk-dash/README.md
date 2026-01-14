@@ -32,19 +32,22 @@
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd moondesk/apps/moondesk-dash
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Set up environment variables**
-   
+
    Copy `.env.local.example` to `.env.local` and add your Clerk keys:
+
    ```bash
    cp .env.local.example .env.local
    ```

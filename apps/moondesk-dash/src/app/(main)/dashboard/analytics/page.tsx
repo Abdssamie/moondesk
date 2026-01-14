@@ -14,7 +14,7 @@ export default function Page() {
         <div className="flex-1">
           <PerformanceMetrics />
         </div>
-        <div className="grid flex-1 grid-cols-1 gap-4 *:data-[slot=card]:shadow-xs md:grid-cols-2">
+        <div className="*:data-[slot=card]:shadow-xs grid flex-1 grid-cols-1 gap-4 md:grid-cols-2">
           <DataUsage />
           <EnergyConsumption />
         </div>

@@ -6,10 +6,10 @@ This package provides a centralized and validated way to manage configuration an
 
 The configuration is split into multiple files, each responsible for a specific domain:
 
--   `env.ts`: Handles base environment variables, such as `NODE_ENV`, `PORT`, and `DATABASE_URL`. It also exports a `isProduction` flag for environment-specific logic.
--   `app.ts`: Manages application-level configurations, such as Clerk keys. It ensures that required variables are present in production environments.
--   `database.ts`: Provides the database connection configuration.
--   `mqtt.ts`: Provides the MQTT connection configuration.
+- `env.ts`: Handles base environment variables, such as `NODE_ENV`, `PORT`, and `DATABASE_URL`. It also exports a `isProduction` flag for environment-specific logic.
+- `app.ts`: Manages application-level configurations, such as Clerk keys. It ensures that required variables are present in production environments.
+- `database.ts`: Provides the database connection configuration.
+- `mqtt.ts`: Provides the MQTT connection configuration.
 
 ## Usage
 
@@ -20,12 +20,12 @@ To access configuration variables, import the appropriate getter function from t
 The `getEnv()` function returns a validated object with the base environment variables.
 
 ```typescript
-import { getEnv } from '@moondesk/config';
+import { getEnv } from "@moondesk/config";
 
 const env = getEnv();
 
-console.log('Node environment:', env.NODE_ENV);
-console.log('Is production:', env.isProduction);
+console.log("Node environment:", env.NODE_ENV);
+console.log("Is production:", env.isProduction);
 ```
 
 ### Application Configuration
@@ -33,12 +33,12 @@ console.log('Is production:', env.isProduction);
 The `getAppConfig()` function returns application-specific configurations, such as Clerk keys.
 
 ```typescript
-import { getAppConfig } from '@moondesk/config';
+import { getAppConfig } from "@moondesk/config";
 
 const appConfig = getAppConfig();
 
 if (appConfig.isProduction) {
-    console.log('Clerk Secret Key:', appConfig.clerk.secretKey);
+  console.log("Clerk Secret Key:", appConfig.clerk.secretKey);
 }
 ```
 

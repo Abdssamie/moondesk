@@ -20,7 +20,7 @@
         }
     },
     "scripts": {
-        "typecheck": "tsc --noEmit",
+        "check-types": "tsc --noEmit",
         "lint": "eslint src/",
         "db:generate": "drizzle-kit generate",
         "db:migrate": "drizzle-kit migrate",
