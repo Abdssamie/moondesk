@@ -3,6 +3,7 @@ import { Parameter } from "../enums/parameter";
 import { Protocol } from "../enums/protocol";
 import { SensorType } from "../enums/sensor-type";
 import { ReadingQuality } from "../enums/reading-quality";
+import { AssetStatus } from "../enums/asset-status";
 
 // Common schemas
 export const IdParamSchema = z.object({
@@ -27,15 +28,33 @@ export const AssetIdParamSchema = z.object({
 export const CreateAssetSchema = z.object({
   name: z.string().min(1, "Name is required"),
   type: z.string().min(1, "Type is required"),
-  description: z.string().optional(),
   location: z.string().optional(),
+  status: z.nativeEnum(AssetStatus).optional(),
+  description: z.string().nullable().optional(),
+  manufacturer: z.string().nullable().optional(),
+  modelNumber: z.string().nullable().optional(),
+  installationDate: z
+    .string()
+    .datetime()
+    .optional()
+    .transform((v) => (v ? new Date(v) : undefined)),
+  metadata: z.record(z.string()).optional(),
 });
 
 export const UpdateAssetSchema = z.object({
   name: z.string().min(1, "Name is required").optional(),
   type: z.string().optional(),
-  description: z.string().optional(),
   location: z.string().optional(),
+  status: z.nativeEnum(AssetStatus).optional(),
+  description: z.string().nullable().optional(),
+  manufacturer: z.string().nullable().optional(),
+  modelNumber: z.string().nullable().optional(),
+  installationDate: z
+    .string()
+    .datetime()
+    .optional()
+    .transform((v) => (v ? new Date(v) : undefined)),
+  metadata: z.record(z.string()).optional(),
 });
 
 // Sensor schemas
