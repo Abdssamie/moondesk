@@ -1,6 +1,31 @@
 import { vi, describe, it, expect, beforeEach } from "vitest";
 
-vi.mock("@moondesk/database");
+// Use vi.hoisted to ensure mocks are initialized before they are used in vi.mock
+const { mockReadingRepo, mockSensorRepo, mockAlertRepo } = vi.hoisted(() => {
+  return {
+    mockReadingRepo: {
+      insert: vi.fn(),
+      bulkInsert: vi.fn(),
+    },
+    mockSensorRepo: {
+      getAllSystemSensors: vi.fn(),
+      getById: vi.fn(),
+    },
+    mockAlertRepo: {
+      create: vi.fn(),
+    },
+  };
+});
+
+// Mock @moondesk/database
+vi.mock("@moondesk/database", () => {
+  return {
+    ReadingRepository: vi.fn(() => mockReadingRepo),
+    SensorRepository: vi.fn(() => mockSensorRepo),
+    AlertRepository: vi.fn(() => mockAlertRepo),
+  };
+});
+
 vi.mock("./api-broadcaster");
 vi.mock("./parser");
 
@@ -9,26 +34,25 @@ import {
   refreshAllSensorThresholds,
   clearThresholdCache,
 } from "./ingestion-handler";
-import { ReadingRepository, SensorRepository } from "@moondesk/database";
 import { broadcastToApi } from "./api-broadcaster";
 import { parseMessage, parseTopic } from "./parser";
 
 describe("Ingestion Handler", () => {
   beforeEach(() => {
-    vi.resetAllMocks();
+    vi.clearAllMocks();
     clearThresholdCache();
   });
 
   describe("handleMessage", () => {
     it('should call handleSingleReading for "readings" action', async () => {
-      const readingRepo = new ReadingRepository();
       vi.mocked(parseTopic).mockReturnValue({
         organizationId: "test-org",
         sensorId: 1,
         action: "readings",
       });
       vi.mocked(parseMessage).mockReturnValue({ value: 25, sensorId: 1 });
-      vi.mocked(readingRepo.insert).mockResolvedValue({
+
+      mockReadingRepo.insert.mockResolvedValue({
         id: 1,
         value: 25,
         timestamp: new Date(),
@@ -36,7 +60,7 @@ describe("Ingestion Handler", () => {
 
       await handleMessage("org/test-org/sensor/1/readings", Buffer.from(""));
 
-      expect(readingRepo.insert).toHaveBeenCalled();
+      expect(mockReadingRepo.insert).toHaveBeenCalled();
       expect(broadcastToApi).toHaveBeenCalledWith(
         "reading",
         expect.any(Object),
@@ -44,35 +68,35 @@ describe("Ingestion Handler", () => {
     });
 
     it("should handle errors in handleSingleReading gracefully", async () => {
-      const readingRepo = new ReadingRepository();
       vi.mocked(parseTopic).mockReturnValue({
         organizationId: "test-org",
         sensorId: 1,
         action: "readings",
       });
       vi.mocked(parseMessage).mockReturnValue({ value: 25, sensorId: 1 });
-      vi.mocked(readingRepo.insert).mockRejectedValue(new Error("DB Error"));
+
+      mockReadingRepo.insert.mockRejectedValue(new Error("DB Error"));
 
       await handleMessage("org/test-org/sensor/1/readings", Buffer.from(""));
 
-      expect(readingRepo.insert).toHaveBeenCalled();
+      expect(mockReadingRepo.insert).toHaveBeenCalled();
     });
   });
 
   describe("refreshAllSensorThresholds", () => {
     it("should fetch all sensors and update the cache", async () => {
-      const sensorRepo = new SensorRepository();
       const sensors = [
         { id: 1, thresholdLow: 10, thresholdHigh: 30 },
         { id: 2, thresholdLow: null, thresholdHigh: 50 },
       ];
-      vi.mocked(sensorRepo.getAllSystemSensors).mockResolvedValue(
+
+      mockSensorRepo.getAllSystemSensors.mockResolvedValue(
         sensors as any,
       );
 
       await refreshAllSensorThresholds();
 
-      expect(sensorRepo.getAllSystemSensors).toHaveBeenCalled();
+      expect(mockSensorRepo.getAllSystemSensors).toHaveBeenCalled();
     });
   });
 });

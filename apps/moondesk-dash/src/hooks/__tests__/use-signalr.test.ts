@@ -12,12 +12,15 @@ vi.mock("@microsoft/signalr", () => {
     state: "Connected",
   };
 
+  // Mock HubConnectionBuilder as a class
+  class MockHubConnectionBuilder {
+    withUrl = vi.fn().mockReturnThis();
+    withAutomaticReconnect = vi.fn().mockReturnThis();
+    build = vi.fn().mockReturnValue(mockConnection);
+  }
+
   return {
-    HubConnectionBuilder: vi.fn().mockImplementation(() => ({
-      withUrl: vi.fn().mockReturnThis(),
-      withAutomaticReconnect: vi.fn().mockReturnThis(),
-      build: vi.fn().mockReturnValue(mockConnection),
-    })),
+    HubConnectionBuilder: MockHubConnectionBuilder,
     HubConnectionState: {
       Connected: "Connected",
       Disconnected: "Disconnected",
