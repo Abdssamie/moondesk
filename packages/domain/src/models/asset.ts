@@ -1,5 +1,5 @@
-import type { AssetStatus } from '../enums/asset-status';
-import type { Sensor } from './sensor';
+import type { AssetStatus } from "../enums/asset-status";
+import type { Sensor } from "./sensor";
 
 /**
  * Represents an industrial asset (machine, equipment, facility) being monitored
@@ -29,7 +29,7 @@ export interface CreateAssetInput {
   organizationId: string;
   name: string;
   type: string;
-  location: string;
+  location?: string;
   status?: AssetStatus;
   description?: string | null;
   manufacturer?: string | null;
@@ -52,4 +52,3 @@ export interface UpdateAssetInput {
   installationDate?: Date | null;
   metadata?: Record<string, string>;
 }
-

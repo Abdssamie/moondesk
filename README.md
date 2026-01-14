@@ -36,34 +36,34 @@ Shared libraries used across the applications:
 
 1. **Clone the repository:**
 
-    ```bash
-    git clone <repository-url>
-    cd moondesk
-    ```
+   ```bash
+   git clone <repository-url>
+   cd moondesk
+   ```
 
 2. **Install dependencies:**
 
-    ```bash
-    pnpm install
-    ```
+   ```bash
+   pnpm install
+   ```
 
 3. **Start Infrastructure:**
-    Spin up the required database and message broker services using Docker Compose.
+   Spin up the required database and message broker services using Docker Compose.
 
-    ```bash
-    docker-compose up -d
-    ```
+   ```bash
+   docker-compose up -d
+   ```
 
 4. **Run Development Server:**
-    Start all applications in development mode.
+   Start all applications in development mode.
 
-    ```bash
-    pnpm dev
-    ```
+   ```bash
+   pnpm dev
+   ```
 
-    - Dashboard: [http://localhost:3000](http://localhost:3000)
-    - API: [http://localhost:3001](http://localhost:3001) (check logs for exact port)
-    - Documentation: [http://localhost:3002](http://localhost:3002)
+   - Dashboard: [http://localhost:3000](http://localhost:3000)
+   - API: [http://localhost:3001](http://localhost:3001) (check logs for exact port)
+   - Documentation: [http://localhost:3002](http://localhost:3002)
 
 ## Common Commands
 
@@ -78,4 +78,4 @@ Check `.env.example` in respective applications for required environment variabl
 
 ## License
 
-Private / Proprietary
+Not set yet
