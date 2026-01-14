@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "@moondesk/domain": "workspace:*",
+        "@types/pg": "^8.16.0",
         "drizzle-orm": "^0.45.0",
         "pg": "^8.16.3"
     },

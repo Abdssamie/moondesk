@@ -1,4 +1,4 @@
-mm    // TODO: Fix linting issues in this package. Linting is currently disabled in package.json to prevent CI hangs.
+// TODO: Fix linting issues in this package. Linting is currently disabled in package.json to prevent CI hangs.
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
