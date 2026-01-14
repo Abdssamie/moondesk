@@ -78,7 +78,7 @@ export class AssetRepository implements IAssetRepository {
         name: input.name,
         type: input.type,
         location: input.location,
-        status: AssetStatus.Unknown,
+        status: input.status ?? AssetStatus.Unknown,
         description: input.description,
         manufacturer: input.manufacturer,
         modelNumber: input.modelNumber,
