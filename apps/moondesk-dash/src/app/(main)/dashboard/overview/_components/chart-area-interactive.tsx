@@ -56,7 +56,7 @@ export function ChartAreaInteractive({ data = [] }: { data?: TimeSeriesPoint[] }
       <CardHeader>
         <CardTitle>Sensor Readings</CardTitle>
         <CardDescription>
-          <span className="hidden @[540px]/card:block">Average readings over time</span>
+          <span className="@[540px]/card:block hidden">Average readings over time</span>
           <span className="@[540px]/card:hidden">Readings trend</span>
         </CardDescription>
         <CardAction>
@@ -65,7 +65,7 @@ export function ChartAreaInteractive({ data = [] }: { data?: TimeSeriesPoint[] }
             value={timeRange}
             onValueChange={setTimeRange}
             variant="outline"
-            className="hidden *:data-[slot=toggle-group-item]:!px-4 @[767px]/card:flex"
+            className="@[767px]/card:flex hidden *:data-[slot=toggle-group-item]:!px-4"
           >
             <ToggleGroupItem value="90d">Last 3 months</ToggleGroupItem>
             <ToggleGroupItem value="30d">Last 30 days</ToggleGroupItem>
@@ -73,7 +73,7 @@ export function ChartAreaInteractive({ data = [] }: { data?: TimeSeriesPoint[] }
           </ToggleGroup>
           <Select value={timeRange} onValueChange={setTimeRange}>
             <SelectTrigger
-              className="flex w-40 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate @[767px]/card:hidden"
+              className="**:data-[slot=select-value]:block **:data-[slot=select-value]:truncate @[767px]/card:hidden flex w-40"
               size="sm"
               aria-label="Select a value"
             >

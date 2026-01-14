@@ -6,7 +6,7 @@ import { MetricTrend } from "@/lib/adapters/dashboard-adapter";
 
 export function SectionCards({ stats }: { stats: MetricTrend[] }) {
   return (
-    <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
+    <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card *:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @5xl/main:grid-cols-4 grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t">
       {stats.map((stat, index) => {
         const TrendIcon = stat.status === "up" ? TrendingUp : stat.status === "down" ? TrendingDown : Activity;
 
@@ -14,7 +14,7 @@ export function SectionCards({ stats }: { stats: MetricTrend[] }) {
           <Card key={index} className="@container/card">
             <CardHeader>
               <CardDescription>{stat.title}</CardDescription>
-              <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">{stat.value}</CardTitle>
+              <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">{stat.value}</CardTitle>
               <CardAction>
                 {!stat.noTrendData && typeof stat.trend === "number" && (
                   <Badge variant="outline">

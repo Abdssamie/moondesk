@@ -60,7 +60,7 @@ export function LayoutControls(props: LayoutControlsProps) {
       <PopoverContent align="end">
         <div className="flex flex-col gap-5">
           <div className="space-y-1.5">
-            <h4 className="text-sm leading-none font-medium">Layout Settings</h4>
+            <h4 className="text-sm font-medium leading-none">Layout Settings</h4>
             <p className="text-muted-foreground text-xs">Customize your dashboard layout preferences.</p>
           </div>
           <div className="space-y-3">
@@ -89,7 +89,7 @@ export function LayoutControls(props: LayoutControlsProps) {
             <div className="space-y-1">
               <Label className="text-xs font-medium">Mode</Label>
               <ToggleGroup
-                className="w-full **:data-[slot=toggle-group-item]:flex-1 **:data-[slot=toggle-group-item]:text-xs"
+                className="**:data-[slot=toggle-group-item]:flex-1 **:data-[slot=toggle-group-item]:text-xs w-full"
                 size="sm"
                 variant="outline"
                 type="single"
@@ -108,7 +108,7 @@ export function LayoutControls(props: LayoutControlsProps) {
             <div className="space-y-1">
               <Label className="text-xs font-medium">Sidebar Variant</Label>
               <ToggleGroup
-                className="w-full **:data-[slot=toggle-group-item]:flex-1 **:data-[slot=toggle-group-item]:text-xs"
+                className="**:data-[slot=toggle-group-item]:flex-1 **:data-[slot=toggle-group-item]:text-xs w-full"
                 size="sm"
                 variant="outline"
                 type="single"
@@ -130,7 +130,7 @@ export function LayoutControls(props: LayoutControlsProps) {
             <div className="space-y-1">
               <Label className="text-xs font-medium">Navbar Style</Label>
               <ToggleGroup
-                className="w-full **:data-[slot=toggle-group-item]:flex-1 **:data-[slot=toggle-group-item]:text-xs"
+                className="**:data-[slot=toggle-group-item]:flex-1 **:data-[slot=toggle-group-item]:text-xs w-full"
                 size="sm"
                 variant="outline"
                 type="single"
@@ -149,7 +149,7 @@ export function LayoutControls(props: LayoutControlsProps) {
             <div className="space-y-1">
               <Label className="text-xs font-medium">Sidebar Collapsible</Label>
               <ToggleGroup
-                className="w-full **:data-[slot=toggle-group-item]:flex-1 **:data-[slot=toggle-group-item]:text-xs"
+                className="**:data-[slot=toggle-group-item]:flex-1 **:data-[slot=toggle-group-item]:text-xs w-full"
                 size="sm"
                 variant="outline"
                 type="single"
@@ -168,7 +168,7 @@ export function LayoutControls(props: LayoutControlsProps) {
             <div className="space-y-1">
               <Label className="text-xs font-medium">Content Layout</Label>
               <ToggleGroup
-                className="w-full **:data-[slot=toggle-group-item]:flex-1 **:data-[slot=toggle-group-item]:text-xs"
+                className="**:data-[slot=toggle-group-item]:flex-1 **:data-[slot=toggle-group-item]:text-xs w-full"
                 size="sm"
                 variant="outline"
                 type="single"

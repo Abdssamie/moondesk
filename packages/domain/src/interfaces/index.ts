@@ -1,3 +1,3 @@
 // Interfaces barrel export
-export * from './repositories/index';
-export * from './services/index';
+export * from "./repositories/index";
+export * from "./services/index";
