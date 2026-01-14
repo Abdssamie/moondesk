@@ -1,0 +1,20 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Get the current branch name
+branch_name=$(git symbolic-ref --short HEAD)
+
+# Check if branch matches the pattern mndsk-<number>-...
+if echo "$branch_name" | grep -qE '^mndsk-[0-9]+-'; then
+  # Extract the identifier (e.g., mndsk-39)
+  ticket_id=$(echo "$branch_name" | grep -oE 'mndsk-[0-9]+' | tr '[:lower:]' '[:upper:]')
+  
+  # Get the current commit message
+  commit_msg=$(cat "$1")
+  
+  # Check if the message already starts with the ticket ID
+  if ! echo "$commit_msg" | grep -qE "^$ticket_id"; then
+    # Prepend the ticket ID to the message
+    echo "$ticket_id $commit_msg" > "$1"
+  fi
+fi
