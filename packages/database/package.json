@@ -1,0 +1,43 @@
+{
+    "name": "@moondesk/database",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "main": "./src/index.ts",
+    "types": "./src/index.ts",
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "default": "./src/index.ts"
+        },
+        "./schema": {
+            "types": "./src/schema/index.ts",
+            "default": "./src/schema/index.ts"
+        },
+        "./repositories": {
+            "types": "./src/repositories/index.ts",
+            "default": "./src/repositories/index.ts"
+        }
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit",
+        "lint": "eslint src/",
+        "db:generate": "drizzle-kit generate",
+        "db:migrate": "drizzle-kit migrate",
+        "db:push": "drizzle-kit push",
+        "db:studio": "drizzle-kit studio"
+    },
+    "dependencies": {
+        "@moondesk/domain": "workspace:*",
+        "drizzle-orm": "^0.45.0",
+        "pg": "^8.16.3"
+    },
+    "devDependencies": {
+        "@moondesk/eslint-config": "workspace:*",
+        "@moondesk/typescript-config": "workspace:*",
+        "@types/node": "^22.15.3",
+        "drizzle-kit": "^0.30.1",
+        "eslint": "^9.15.0",
+        "typescript": "5.9.2"
+    }
+}

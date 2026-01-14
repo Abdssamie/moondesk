@@ -1,0 +1,112 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg17
+    container_name: moondesk_db
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-moondesk}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
+    networks:
+      - moondesk_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: moondesk_mqtt
+    ports:
+      - "${MQTT_PORT:-1883}:1883"
+      - "9001:9001"
+    volumes:
+      - ./docker/mosquitto/config:/mosquitto/config
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+    networks:
+      - moondesk_net
+
+  redis:
+    image: redis:alpine
+    container_name: moondesk_redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - moondesk_net
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: moondesk_api
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@timescaledb:5432/${DB_NAME}
+      - MQTT_HOST=mosquitto
+      - REDIS_HOST=redis
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      - CLERK_PUBLISHABLE_KEY=${CLERK_PUBLISHABLE_KEY}
+      - INTERNAL_SERVICE_TOKEN=${INTERNAL_SERVICE_TOKEN}
+    ports:
+      - "3000:3000"
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+      mosquitto:
+        condition: service_started
+    networks:
+      - moondesk_net
+
+  mqtt-worker:
+    build:
+      context: .
+      dockerfile: apps/mqtt-worker/Dockerfile
+    container_name: moondesk_worker
+    environment:
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@timescaledb:5432/${DB_NAME}
+      - MQTT_HOST=mosquitto
+      - INTERNAL_SERVICE_TOKEN=${INTERNAL_SERVICE_TOKEN}
+      - API_URL=http://api:3000
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+      mosquitto:
+        condition: service_started
+      api:
+        condition: service_started
+    networks:
+      - moondesk_net
+
+  edge-simulator:
+    build:
+      context: .
+      dockerfile: apps/edge-simulator/Dockerfile
+    container_name: moondesk_simulator
+    environment:
+      - MQTT_HOST=mosquitto
+    depends_on:
+      mosquitto:
+        condition: service_started
+    networks:
+      - moondesk_net
+    profiles:
+      - tools  # Don't run by default with 'docker-compose up', explicit only
+
+
+volumes:
+  timescaledb_data:
+  mosquitto_data:
+  mosquitto_log:
+  redis_data:
+
+networks:
+  moondesk_net:
+    driver: bridge
