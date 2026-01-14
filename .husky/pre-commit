@@ -1,0 +1,15 @@
+#!/bin/sh
+branch_name=$(git symbolic-ref --short HEAD)
+
+if [ "$branch_name" = "main" ] || [ "$branch_name" = "master" ]; then
+  echo "❌ Error: Direct commits to $branch_name are not allowed."
+  echo "Please create a new branch following the convention: mndsk-<number>-<title>"
+  exit 1
+fi
+
+if ! echo "$branch_name" | grep -qE '^mndsk-[0-9]+-.+$'; then
+  echo "❌ Error: Branch name '$branch_name' does not follow the convention."
+  echo "Required format: mndsk-<number>-<title> (e.g., mndsk-38-data-repositories)"
+  echo "This naming convention is required to link commits to Linear tickets."
+  exit 1
+fi

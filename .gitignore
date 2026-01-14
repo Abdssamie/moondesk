@@ -1,0 +1,22 @@
+# Binaries
+bin/
+dist/
+
+# Modules
+node_modules/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+.cursor/
+.cursorrules
+
+moondesk-ts-legacy
+
+# Env
+.env
