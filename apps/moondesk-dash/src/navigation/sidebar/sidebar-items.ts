@@ -6,7 +6,6 @@ import {
   Lock,
   LayoutDashboard,
   ChartBar,
-  Banknote,
   Gauge,
   type LucideIcon,
   Settings,

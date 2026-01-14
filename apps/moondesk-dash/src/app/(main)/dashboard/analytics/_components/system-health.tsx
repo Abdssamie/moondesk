@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, CheckCircle, AlertCircle, XCircle } from "lucide-react";
+import { Activity, CheckCircle, AlertCircle } from "lucide-react";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
