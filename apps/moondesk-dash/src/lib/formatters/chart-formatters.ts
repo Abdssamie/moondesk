@@ -15,7 +15,7 @@
  * currencyFormatter(1000000) // "$1,000,000"
  */
 export const currencyFormatter = (value: number): string => {
-  return `${Intl.NumberFormat('us').format(value).toString()}`;
+  return `${Intl.NumberFormat("us").format(value).toString()}`;
 };
 
 /**
@@ -47,9 +47,11 @@ export const percentageFormatter = (value: number): string => {
  * const pressureFormatter = unitFormatter('PSI');
  * pressureFormatter(50) // "50 PSI"
  */
-export const unitFormatter = (unit: string) => (value: number): string => {
-  return `${value} ${unit}`;
-};
+export const unitFormatter =
+  (unit: string) =>
+  (value: number): string => {
+    return `${value} ${unit}`;
+  };
 
 /**
  * Formats large numbers using compact notation.
@@ -64,7 +66,7 @@ export const unitFormatter = (unit: string) => (value: number): string => {
  * compactFormatter(1234567890) // "1.2B"
  */
 export const compactFormatter = (value: number): string => {
-  return Intl.NumberFormat('us', { notation: 'compact' }).format(value).toString();
+  return Intl.NumberFormat("us", { notation: "compact" }).format(value).toString();
 };
 
 /**
@@ -81,9 +83,11 @@ export const compactFormatter = (value: number): string => {
  * const oneDecimalFormatter = decimalFormatter(1);
  * oneDecimalFormatter(123.456) // "123.5"
  */
-export const decimalFormatter = (decimals: number = 2) => (value: number): string => {
-  return value.toFixed(decimals);
-};
+export const decimalFormatter =
+  (decimals: number = 2) =>
+  (value: number): string => {
+    return value.toFixed(decimals);
+  };
 
 /**
  * Formats temperature values in Celsius.

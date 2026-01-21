@@ -18,7 +18,7 @@ export function AssetInsightCards({ data }: { data: PieChartData[] }) {
   const totalAssets = data.reduce((acc, curr) => acc + curr.value, 0);
 
   return (
-    <div className="*:data-[slot=card]:shadow-xs grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 *:data-[slot=card]:shadow-xs sm:grid-cols-2 xl:grid-cols-3">
       <Card className="col-span-1 xl:col-span-1">
         <CardHeader>
           <CardTitle>Asset Distribution</CardTitle>

@@ -1,4 +1,6 @@
+/* eslint-disable max-lines */
 import { describe, expect, it } from "vitest";
+
 import {
   assetTableRowSchema,
   assetTableRowsSchema,
@@ -353,9 +355,7 @@ describe("validateChartData", () => {
       value: 100,
     };
 
-    expect(() => validateChartData(timeSeriesPointSchema, invalidData)).toThrow(
-      ChartDataValidationError,
-    );
+    expect(() => validateChartData(timeSeriesPointSchema, invalidData)).toThrow(ChartDataValidationError);
   });
 
   it("should include detailed error message", () => {
@@ -445,6 +445,7 @@ describe("ChartDataValidationError", () => {
     try {
       timeSeriesPointSchema.parse(invalidData);
     } catch (zodError) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const error = new ChartDataValidationError("Test error", zodError as any);
       expect(error.zodError).toBeDefined();
     }

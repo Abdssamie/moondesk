@@ -31,7 +31,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof assetSch
           View
         </Label>
         <Select defaultValue="all">
-          <SelectTrigger className="@4xl/main:hidden flex w-fit" size="sm" id="view-selector">
+          <SelectTrigger className="flex w-fit @4xl/main:hidden" size="sm" id="view-selector">
             <SelectValue placeholder="Select a view" />
           </SelectTrigger>
           <SelectContent>
@@ -41,7 +41,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof assetSch
             <SelectItem value="maintenance">Maintenance</SelectItem>
           </SelectContent>
         </Select>
-        <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex hidden">
+        <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
           <TabsTrigger value="all">All Assets</TabsTrigger>
           <TabsTrigger value="online">
             Online <Badge variant="secondary">{data.filter((a) => a.status === "Online").length}</Badge>

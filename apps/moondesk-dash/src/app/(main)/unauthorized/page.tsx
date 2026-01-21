@@ -15,7 +15,7 @@ export default function page() {
         <div className="mt-6">
           <Link
             href="dashboard"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary shadow-xs focus:outline-hidden inline-flex items-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:ring-2 focus:ring-offset-2"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary inline-flex items-center rounded-md px-4 py-2 text-sm font-medium shadow-xs transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
             prefetch={false}
           >
             Go to Homepage

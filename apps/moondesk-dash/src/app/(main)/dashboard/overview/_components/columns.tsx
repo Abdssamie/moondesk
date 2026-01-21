@@ -43,7 +43,7 @@ export const assetColumns: ColumnDef<z.infer<typeof assetSchema>>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Asset Name" />,
-    cell: ({ row }) => <span className="font-medium">{row.getValue("name") as string}</span>,
+    cell: ({ row }) => <span className="font-medium">{row.getValue("name")}</span>,
     enableSorting: true,
   },
   {
@@ -52,7 +52,7 @@ export const assetColumns: ColumnDef<z.infer<typeof assetSchema>>[] = [
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.getValue("type") as string}
+          {row.getValue("type")}
         </Badge>
       </div>
     ),
@@ -62,7 +62,7 @@ export const assetColumns: ColumnDef<z.infer<typeof assetSchema>>[] = [
     accessorKey: "status",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
     cell: ({ row }) => {
-      const status = row.getValue("status") as string;
+      const status = row.getValue("status");
       const isOnline = status === "Online";
       return (
         <Badge variant="outline" className="text-muted-foreground gap-1.5 px-1.5">

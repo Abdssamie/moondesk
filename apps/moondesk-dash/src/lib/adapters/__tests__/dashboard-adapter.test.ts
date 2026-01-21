@@ -1,13 +1,4 @@
-import {
-  Asset,
-  Alert,
-  ReadingStats,
-  AssetStatus,
-  SensorType,
-  Parameter,
-  Protocol,
-  AlertSeverity,
-} from "@moondesk/domain";
+import { Asset, ReadingStats } from "@moondesk/domain";
 import { describe, it, expect } from "vitest";
 
 import { adaptToMetricTrends } from "../dashboard-adapter";
@@ -15,7 +6,6 @@ import { adaptToMetricTrends } from "../dashboard-adapter";
 describe("dashboard-adapter", () => {
   it("should adapt ReadingStats to MetricTrend", () => {
     const assets: Asset[] = [];
-    const alerts: Alert[] = [];
     const readingStats: ReadingStats = {
       total: 1234567,
       dailyTrend: 0,

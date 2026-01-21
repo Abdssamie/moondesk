@@ -99,7 +99,7 @@ export function TableCellViewer({ item }: { item: z.infer<typeof sectionSchema> 
               </ChartContainer>
               <Separator />
               <div className="grid gap-2">
-                <div className="flex gap-2 font-medium leading-none">
+                <div className="flex gap-2 leading-none font-medium">
                   Trending up by 5.2% this month <TrendingUp className="size-4" />
                 </div>
                 <div className="text-muted-foreground">

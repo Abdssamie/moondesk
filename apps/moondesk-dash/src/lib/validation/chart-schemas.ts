@@ -26,9 +26,7 @@ export const metricTrendSchema = z.object({
   label: z.string().min(1, "Label is required"),
   status: z.enum(["up", "down", "neutral"]),
   description: z.string().min(1, "Description is required"),
-  icon: z
-    .enum(["trending-up", "trending-down", "users", "activity", "alert-circle"])
-    .optional(),
+  icon: z.enum(["trending-up", "trending-down", "users", "activity", "alert-circle"]).optional(),
 });
 
 /**

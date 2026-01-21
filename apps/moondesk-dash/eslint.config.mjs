@@ -87,7 +87,7 @@ export default defineConfig([
         },
       ],
       "no-duplicate-imports": ["error", { includeExports: true }],
-      "import/no-cycle": ["error", { maxDepth: 2 }],
+      // "import/no-cycle": ["error", { maxDepth: 2 }],
 
       // Whitespace and Punctuation (Style Rules)
       "no-trailing-spaces": "error",

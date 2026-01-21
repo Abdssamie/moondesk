@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, CheckCircle, AlertCircle, XCircle } from "lucide-react";
+import { Activity, CheckCircle, AlertCircle } from "lucide-react";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -32,7 +32,7 @@ export function SystemHealth() {
           </TabsList>
           <TabsContent value="status" className="space-y-4">
             {systemComponents.map((component, i) => (
-              <div key={i}>
+              <div key={component.name}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <component.icon className={`size-4 ${component.color}`} />
@@ -46,7 +46,7 @@ export function SystemHealth() {
           </TabsContent>
           <TabsContent value="uptime" className="space-y-4">
             {systemComponents.map((component, i) => (
-              <div key={i}>
+              <div key={component.name}>
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">{component.name}</span>
                   <span className="text-sm font-semibold tabular-nums">{component.uptime}</span>
