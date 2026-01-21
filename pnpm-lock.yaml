@@ -352,7 +352,7 @@ importers:
         specifier: ^19.0.0-beta-df7b47d-20241124
         version: 19.0.0-beta-ebf51a3-20250411
       eslint:
-        specifier: ^9.39.1
+        specifier: ^9.37.0
         version: 9.39.1(jiti@2.6.1)
       eslint-config-next:
         specifier: ^16.0.1
