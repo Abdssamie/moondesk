@@ -82,6 +82,8 @@ This is a **Monorepo** managed by **Turbo** and **pnpm** workspaces.
 1.  **Strict Types**: We do NOT use `any`. All types should be defined in `@moondesk/domain` if shared.
 2.  **Docker First**: The entire backend stack runs in Docker.
 3.  **Environment Variables**: Strictly validated using Zod in `@moondesk/config`.
+4.  **Code Quality**: Write correct, best practice, DRY, bug-free, and fully functional code.
+5.  **Completeness**: Leave NO todo’s, placeholders, or missing pieces. Ensure code is fully finalized.
 
 ## 7. Pre-Push Verification
 
@@ -97,8 +99,9 @@ This is a **Monorepo** managed by **Turbo** and **pnpm** workspaces.
 
 Every commit message should provide context. The Linear ID will be auto-prepended.
 
-1.  **Summary Line**: `feat: implement user login flow`
-2.  **Detailed Description**: List changed files and why.
+1.  **Summary Line**: `feat: implement user login flow` (Brief and follows conventional commit format)
+2.  **Detailed Description**: List changed files and why. Include elaborate details in the body.
+3.  **Format**: Add two newlines after the commit message title.
 
 Example:
 
@@ -108,3 +111,114 @@ feat: implement user login flow
 - apps/api/src/controllers/auth.controller.ts: Added login endpoint handler.
 - packages/domain/src/schemas/auth.schema.ts: Added Zod schema.
 ```
+
+## 9. Testing & Quality Control (Agent Specific)
+
+Agents must run tests to verify changes. The project uses **Vitest**.
+
+### Running Tests
+
+- **All Tests**: `turbo run test` (runs all workspace tests).
+-
+- **Specific Workspace**: `pnpm test --filter @moondesk/api`.
+- **Single Test File**:
+  1. Navigate to the app directory: `apps/api` (using `workdir` parameter).
+  2. Run: `pnpm test src/controllers/auth.controller.spec.ts`
+- **Single Test Case**:
+  1. Navigate to the app directory.
+  2. Run: `pnpm test -- -t "should handle user.created event"`
+
+### Linting & Formatting
+
+- **Lint**: `turbo run lint` or `eslint src/` within a workspace.
+- **Format**: `pnpm format` (uses Prettier).
+- **Type Check**: `turbo run check-types` is the source of truth.
+
+### Code Review Checklist
+
+- Ensure proper typing (no `any`).
+- Check for code duplication (DRY).
+- Verify error handling (try/catch, typed errors).
+- Confirm test coverage.
+- Assess overall code structure and readability.
+
+## 10. Code Style Guidelines
+
+Adhere to these styles to ensure consistency across the monorepo.
+
+### 10.1 Imports
+
+Sort imports in the following order:
+
+1.  **External Libraries**: `import { Fastify } from 'fastify';`
+2.  **Internal Packages**: `import { getEnv } from '@moondesk/config';` (Always use `@moondesk/*` aliases)
+3.  **Relative Imports**: `import { createApp } from './app';`
+
+- If an import is only used as a type, use `import type`.
+
+### 10.2 TypeScript & Naming
+
+- **Strictness**: No `any`. Use `unknown` with narrowing if necessary.
+- **Interfaces**: Prefer `interface` for object shapes, `type` for unions/primitives.
+- **Naming**:
+  - Variables/Functions: `camelCase` (e.g., `processIngestion`, `getUserData`)
+  - Classes/Components: `PascalCase` (e.g., `WebhookController`, `Button`)
+  - Constants: `UPPER_SNAKE_CASE` (e.g., `INTERNAL_SERVICE_TOKEN`)
+  - Files: `kebab-case` (e.g., `auth.controller.ts`, `user.schema.ts`)
+- **Functions**: Use descriptive names (verbs & nouns). Prefer arrow functions for simple operations (e.g., `const toggle = () =>`).
+- **Types**: For new types, prefer creating a Zod schema and inferring the type. Use `readonly` for immutable properties.
+
+### 10.3 Error Handling
+
+- **Typed Exceptions**: Do not throw raw strings. Use typed error classes or objects.
+- **Logging**: Use the `@moondesk/logger` instance.
+  - **Bad**: `console.log(error)`
+  - **Good**: `logger.error(error, 'Failed to process webhook')`
+- **Graceful Failure**: API endpoints should return structured 4xx/5xx responses, not crash.
+
+### 10.4 Testing Patterns
+
+- **Framework**: Vitest + Supertest (for API integration).
+- **Mocking**: Use `vi.mock()` for external dependencies.
+- **Structure**: Group with `describe`, define cases with `it` or `test`.
+- **Setup**: Use `beforeEach` to reset mocks/state.
+
+### 10.5 Agent Behavior
+
+- **Dependencies**: Do NOT install new packages without explicit user permission.
+- **Configuration**: Changes to `package.json` or `tsconfig.json` require justification.
+- **Hallucinations**: Do not assume standard libraries exist if they are not in `package.json`.
+- **Verification**: ALWAYS run `pnpm check-types` after making changes.
+- **Plan First**: Describe your plan in pseudocode/detail before writing code.
+- **Documentation**: Follow Google's Technical Writing Style Guide. Use JSDoc for all code.
+
+## 11. Frontend Development Guidelines
+
+Specific rules for React, Next.js, and UI components (e.g., `apps/moondesk-dash`).
+
+- **Tech Stack**: ReactJS, NextJS, TypeScript, TailwindCSS, Shadcn, Radix.
+- **Styling**:
+  - Always use **Tailwind classes** for styling; avoid custom CSS or style tags.
+  - Use `class:` (or `cn` utility) instead of ternary operators in class strings where possible.
+- **Components**:
+  - Use `const` for components: `const MyComponent = () =>`.
+  - Naming: `PascalCase` for components.
+  - Handlers: Prefix with `handle` (e.g., `handleClick`, `handleKeyDown`).
+- **Accessibility**:
+  - Ensure interactive elements have `tabindex`, `aria-label`, `on:click`, `on:keydown`.
+- **Implementation**:
+  - Focus on readability.
+  - Use early returns to simplify logic.
+  - **Minimize Prose**: Be concise in explanations.
+
+## 12. Advanced Workflows & Shortcuts
+
+- **`CURSOR:PAIR`**: Act as a senior pair programmer. Provide alternatives, guidance, and weigh in on the best course of action.
+- **`RFC`**: Refactor code per instructions. Follow requirements strictly.
+- **`RFP`**: Improve the provided prompt. Break it down into smaller steps using Google's Technical Writing Style Guide.
+
+## 13. Documentation Standards
+
+- **Style**: Follow Google's Technical Writing Style Guide.
+- **Voice**: Active voice, present tense, clear and concise.
+- **JSDoc**: Always write JSDocs for classes, functions, methods, fields, types, and interfaces. Use TypeDoc compatible tags.
