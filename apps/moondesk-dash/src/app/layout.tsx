@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     >
       <html
         lang="en"
-        className={themeMode === "dark" ? "dark" : ""}
+        className={`${themeMode === "dark" ? "dark" : ""} dark:bg-slate-950`}
         data-theme-preset={themePreset}
         suppressHydrationWarning
       >
