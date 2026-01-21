@@ -62,8 +62,7 @@ export const assetColumns: ColumnDef<z.infer<typeof assetSchema>>[] = [
     accessorKey: "status",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
     cell: ({ row }) => {
-      const status = row.getValue("status");
-      const isOnline = status === "Online";
+      const isOnline = row.getValue("status") === "Online";
       return (
         <Badge variant="outline" className="text-muted-foreground gap-1.5 px-1.5">
           {isOnline ? (
@@ -71,7 +70,7 @@ export const assetColumns: ColumnDef<z.infer<typeof assetSchema>>[] = [
           ) : (
             <AlertCircle className="fill-destructive/20 text-destructive size-3.5" />
           )}
-          {status}
+          {row.getValue("status")}
         </Badge>
       );
     },

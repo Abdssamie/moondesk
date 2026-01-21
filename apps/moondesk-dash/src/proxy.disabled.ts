@@ -1,6 +1,6 @@
 // Proxy disabled.
 // Rename this file to `proxy.ts` to enable it.
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 /**
  * Runs before requests complete.
