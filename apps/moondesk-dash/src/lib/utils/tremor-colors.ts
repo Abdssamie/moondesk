@@ -1,6 +1,4 @@
-import type { AssetStatus } from "@moondesk/domain/enums/asset-status";
-import type { AlertSeverity } from "@moondesk/domain/enums/alert-severity";
-import type { ReadingQuality } from "@moondesk/domain/enums/reading-quality";
+import type { AlertSeverity, AssetStatus, ReadingQuality } from "@moondesk/domain";
 
 /**
  * Available Tremor colors for charts and components

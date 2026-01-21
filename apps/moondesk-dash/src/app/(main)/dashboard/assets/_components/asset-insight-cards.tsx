@@ -36,8 +36,8 @@ export function AssetInsightCards({ data }: { data: PieChartData[] }) {
                 paddingAngle={2}
                 cornerRadius={4}
               >
-                {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.fill} />
+                {data.map((entry) => (
+                  <Cell key={`cell-${entry.name}`} fill={entry.fill} />
                 ))}
                 <Label
                   content={({ viewBox }) => {

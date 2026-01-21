@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
  * Use for rewrites, redirects, or header changes.
  * Refer to Next.js Proxy docs for more examples.
  */
-export function proxy(_req: NextRequest) {
+export function proxy() {
   // Example: redirect to dashboard if user is logged in
   // const token = req.cookies.get("session_token")?.value;
   // if (token && req.nextUrl.pathname === "/auth/login")
