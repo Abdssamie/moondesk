@@ -1,5 +1,4 @@
 import { auth } from "@clerk/nextjs/server";
-import { Asset } from "@moondesk/domain";
 
 import { DataTable } from "@/app/(main)/dashboard/overview/_components/data-table";
 import { adaptAssetsToDistribution, adaptAssetsToTableRows } from "@/lib/adapters/dashboard-adapter";
